@@ -36,13 +36,25 @@ LED_STRIP      = ws.WS2811_STRIP_GRB   # Strip type and colour ordering
 
 # Define functions which animate LEDs in various ways.
 def colorAll(strip, color, wait_ms=50):
-	"""Wipe color across display a pixel at a time."""
+	"""Wipe color across display all at once, almost."""
 	for i in range(strip.numPixels()):
 		strip.setPixelColor(i, color)
 #		strip.show()
 #		time.sleep(wait_ms/1000.0)
 	strip.show()
 	time.sleep(wait_ms/10.0)
+
+def colorFlash(strip, color, duration_in_seconds, wait_ms=50):
+	iterations = duration_in_seconds
+	for j in range(iterations):
+		for i in range(strip.numPixels()):
+			strip.setPixelColor(i, color)
+		strip.show()
+		time.sleep(wait_ms/100.0)
+		for i in range(strip.numPixels()):
+			strip.setPixelColor(i, 0)
+		strip.show()
+		time.sleep(wait_ms/100.0)
 
 def colorWipe(strip, color, wait_ms=50):
 	"""Wipe color across display a pixel at a time."""
@@ -125,6 +137,10 @@ if __name__ == '__main__':
 #		rainbowCycle(strip)
 #		theaterChaseRainbow(strip)
 
+	print ('White theater chase animation.')
+	theaterChase(strip, Color(127, 127, 127))  # White theater chase
+	print ('White flash animation.')
+	colorFlash(strip, Color(127, 127, 127), 5)  # White flash
 	print ('Green wipe animation.')
 	colorWipe(strip, Color(0, 255, 0))  # Green wipe
 #        inkey = input("Press any key to quit.")
