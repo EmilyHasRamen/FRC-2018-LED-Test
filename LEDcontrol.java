@@ -1,6 +1,9 @@
 import java.util.Scanner;
-import java.io.PrintWriter;
 import java.io.File;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+
+import java.text.*;  // for SimpleDateFormat()
 
 public class LEDcontrol {
     public static void main( String[] args ) {
@@ -48,29 +51,29 @@ public class LEDcontrol {
         }
         System.out.println("LEDmode = '" + LEDmode + "'");
 
-//        PrintWriter pw = null;
-//        try {
-//             File file = new File("LEDstrip.txt");
-////             FileWriter fw = new FileWriter(file, true);
-//             FileWriter fw = new FileWriter(file, false);
-//             pw = new PrintWriter(fw);
-//             pw.print(LEDmode);
-//        } catch (IOException e) {
-//             e.printStackTrace();
-//        } finally {
-//             if (pw != null) {
-//                 pw.close();
-//             }
- //       }
 
-//         File fileLocation = new File("./LEDstrip.txt");
-//         File file = new File("LEDstrip.txt");
- //        fileLocation.getParentFile().mkdirs();
-//         PrintWriter outFile = new PrintWriter(file);
-//         PrintWriter outFile = new PrintWriter("LEDstrip.txt");
-//         BufferedWriter outFile = null;
-//         outFile = new BufferedWriter( new FileWriter("LEDstrip.txt"));
-//         outFile.print(LEDmode);
-//         outFile.close();
+        BufferedWriter writer = null;
+        try {
+            //create a temporary file
+//            String timeLog = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
+            String timeLog = "LEDstrip.txt";
+            File logFile = new File(timeLog);
+
+            // This will output the full path where the file will be written to...
+            System.out.println(logFile.getCanonicalPath());
+
+            writer = new BufferedWriter(new FileWriter(logFile));
+            writer.write(LEDmode);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                // Close the writer regardless of what happens...
+                writer.close();
+            } catch (Exception e) {
+            }
+        }
+        // writer = new BufferedWriter(new FileWriter(logFile, true));  // to append the text to the file 
+
     }
 }
