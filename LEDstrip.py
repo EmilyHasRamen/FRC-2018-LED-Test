@@ -27,7 +27,7 @@ LED_PIN        = 18      # GPIO pin connected to the pixels (18 uses PWM!).
 #LED_PIN        = 10      # GPIO pin connected to the pixels (10 uses SPI /dev/spidev0.0).
 LED_FREQ_HZ    = 800000  # LED signal frequency in hertz (usually 800khz)
 LED_DMA        = 10      # DMA channel to use for generating signal (try 10)
-LED_BRIGHTNESS = 255     # Set to 0 for darkest and 255 for brightest
+LED_BRIGHTNESS = 60     # Set to 0 for darkest and 255 for brightest
 LED_INVERT     = False   # True to invert the signal (when using NPN transistor level shift)
 LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 LED_STRIP      = ws.WS2811_STRIP_GRB   # Strip type and colour ordering
@@ -158,13 +158,16 @@ if __name__ == '__main__':
 ##	file.writelines("FLASHWHITE")
 #	file.writelines("GREEN")
 #	file.close()
-	file = open("LEDstrip.txt","r")
+#	file = open("LEDstrip.txt","r")
+#       add fullpath LEDstrip.txt for /etc/rc.local to run LEDstrip.py at startup
+	file = open("/home/pi/Documents/FRC-2018-LED-Test/LEDstrip.txt","r")
 	print file.read()
 	file.close()
 	while True:
 #        int month = 8;
 ##        String LEDmode;
-           with open("LEDstrip.txt") as file:
+#           with open("LEDstrip.txt") as file:
+           with open("/home/pi/Documents/FRC-2018-LED-Test/LEDstrip.txt") as file:
 		LEDmode = file.read()
            print('LEDmode = "' + LEDmode + '" (Press Ctrl-C to quit.)')
 	   file.close()
@@ -179,11 +182,11 @@ if __name__ == '__main__':
 	   elif LEDmode == "WHITE": 
               colorAll(strip, Color(255, 255, 255), 1)    # White
 	   elif LEDmode == "FLASHBLUE":
-              colorFlash(strip, Color(0, 0, 255), 3)      # Blue flash
+              colorFlash(strip, Color(0, 0, 255), 1)      # Blue flash
 	   elif LEDmode == "FLASHRED":
-              colorFlash(strip, Color(255, 0, 0), 3)      # Red flash
+              colorFlash(strip, Color(255, 0, 0), 1)      # Red flash
 	   elif LEDmode == "FLASHGREEN":
-              colorFlash(strip, Color(0, 255, 0), 3)      # Green flash
+              colorFlash(strip, Color(0, 255, 0), 1)      # Green flash
 	   elif LEDmode == "FLASHWHITE": 
               colorFlash(strip, Color(255, 255, 255), 10) # White flash
 	   else:
