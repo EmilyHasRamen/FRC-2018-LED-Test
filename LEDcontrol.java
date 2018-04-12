@@ -19,6 +19,9 @@ public class LEDcontrol {
         System.out.println( "7 = FLASHGREEN" );
         System.out.println( "8 = FLASHWHITE" );
         System.out.println( "9 = BLACK" );
+        System.out.println( "10 = RAINBOW" );
+        System.out.println( "11 = RAINBOWCYCLE" );
+        System.out.println( "12 = RAINBOWTHEATERCHASE" );
         System.out.println( "0 = Exit Program" );
 
         System.out.println("Enter a number: ");
@@ -45,6 +48,12 @@ public class LEDcontrol {
             case 0:  LEDmode = "BLACK";
                      reader.close();
                      System.exit( 0 );
+                     break;
+            case 10: LEDmode = "RAINBOW";
+                     break;
+            case 11: LEDmode = "RAINBOWCYCLE";
+                     break;
+            case 12: LEDmode = "RAINBOWTHEATERCHASE";
                      break;
             default: LEDmode = "BLACK";
                      break;

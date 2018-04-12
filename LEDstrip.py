@@ -189,6 +189,12 @@ if __name__ == '__main__':
               colorFlash(strip, Color(0, 255, 0), 1)      # Green flash
 	   elif LEDmode == "FLASHWHITE": 
               colorFlash(strip, Color(255, 255, 255), 10) # White flash
+	   elif LEDmode == "RAINBOW":
+	      rainbow(strip)                              # rainbow fade at once
+	   elif LEDmode == "RAINBOWCYCLE":
+	      rainbowCycle(strip)                         # rainbow cycle
+           elif LEDmode == "RAINBOWTHEATERCHASE":
+              theaterChaseRainbow(strip)
 	   else:
               colorAll(strip, Color(0, 0, 0), 1)          # Black
 
